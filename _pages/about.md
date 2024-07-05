@@ -1,49 +1,132 @@
 ---
 permalink: /
-title: "Academic Pages is a ready-to-fork GitHub Pages template for academic personal websites"
+title: "About me"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
 
-This is the front page of a website that is powered by the [Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the respository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. You can fork [this repository](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and markdown files, add your own PDFs and other content, and have your own site for free, with no ads! An older version of this template powers my own personal website at [stuartgeiger.com](http://stuartgeiger.com), which uses [this Github repository](https://github.com/staeiou/staeiou.github.io).
+I’m an incoming PhD student at the [Agile Robotics and Perception Lab (ARPL)](https://wp.nyu.edu/arpl/), New York University. My research interests pertain to developing algorithms to facilitate autonomous navigation of aerial vehicles, particularily in the wild. I obtained my M.S. degree from New York University and B.S. degree from Manipal Institute of Technology.
 
-A data-driven personal website
-======
-Like many other Jekyll-based GitHub Pages templates, Academic Pages makes you separate the website's content from its form. The content & metadata of your website are in structured markdown files, while various other files constitute the theme, specifying how to transform that content & metadata into HTML pages. You keep these various markdown (.md), YAML (.yml), HTML, and CSS files in a public GitHub repository. Each time you commit and push an update to the repository, the [GitHub pages](https://pages.github.com/) service creates static HTML pages based on these files, which are hosted on GitHub's servers free of charge.
+<style>
+    .toggle-container {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        font-size: 22px; /* Larger font size */
+        color: #007bff; /* Blue color */
+        font-weight: bold; /* Bold text */
+    }
 
-Many of the features of dynamic content management systems (like Wordpress) can be achieved in this fashion, using a fraction of the computational resources and with far less vulnerability to hacking and DDoSing. You can also modify the theme to your heart's content without touching the content of your site. If you get to a point where you've broken something in Jekyll/HTML/CSS beyond repair, your markdown files describing your talks, publications, etc. are safe. You can rollback the changes or even delete the repository and start over -- just be sure to save the markdown files! Finally, you can also write scripts that process the structured data on the site, such as [this one](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb) that analyzes metadata in pages about talks to display [a map of every location you've given a talk](https://academicpages.github.io/talkmap.html).
+    .triangle {
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-left: 10px solid black; /* Pointing to the right */
+        margin-right: 8px;
+        transition: transform 0.3s;
+    }
 
-Getting started
-======
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Fork [this repository](https://github.com/academicpages/academicpages.github.io) by clicking the "fork" button in the top right. 
-1. Go to the repository's settings (rightmost item in the tabs that start with "Code", should be below "Unwatch"). Rename the repository "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and create content & metadata (see below -- also see [this set of diffs](http://archive.is/3TPas) showing what files were changed to set up [an example site](https://getorg-testacct.github.io) for a user with the username "getorg-testacct")
-1. Upload any files (like PDFs, .zip files, etc.) to the files/ directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
+    .triangle.open {
+        transform: rotate(90deg);
+    }
 
-Site-wide configuration
-------
-The main configuration file for the site is in the base directory in [_config.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_config.yml), which defines the content in the sidebars and other site-wide features. You will need to replace the default variables with ones about yourself and your site's github repository. The configuration file for the top menu is in [_data/navigation.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_data/navigation.yml). For example, if you don't have a portfolio or blog posts, you can remove those items from that navigation.yml file to remove them from the header. 
+    .news-content {
+        display: block;
+        margin-top: 10px;
+        overflow: hidden;
+        max-height: 24px; /* Limit the max height to show only 2 items initially */
+        transition: max-height 0.3s ease-out;
+    }
 
-Create content & metadata
-------
-For site content, there is one markdown file for each type of content, which are stored in directories like _publications, _talks, _posts, _teaching, or _pages. For example, each talk is a markdown file in the [_talks directory](https://github.com/academicpages/academicpages.github.io/tree/master/_talks). At the top of each markdown file is structured data in YAML about the talk, which the theme will parse to do lots of cool stuff. The same structured data about a talk is used to generate the list of talks on the [Talks page](https://academicpages.github.io/talks), each [individual page](https://academicpages.github.io/talks/2012-03-01-talk-1) for specific talks, the talks section for the [CV page](https://academicpages.github.io/cv), and the [map of places you've given a talk](https://academicpages.github.io/talkmap.html) (if you run this [python file](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.py) or [Jupyter notebook](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb), which creates the HTML for the map based on the contents of the _talks directory).
+    .news-content.open {
+        max-height: none; /* Expand to show all items when open */
+    }
+</style>
 
-**Markdown generator**
+<div class="toggle-container" onclick="toggleNews()">
+    <div class="triangle" id="triangle"></div>
+    <span>News!</span>
+</div>
 
-I have also created [a set of Jupyter notebooks](https://github.com/academicpages/academicpages.github.io/tree/master/markdown_generator
-) that converts a CSV containing structured data about talks or presentations into individual markdown files that will be properly formatted for the Academic Pages template. The sample CSVs in that directory are the ones I used to create my own personal website at stuartgeiger.com. My usual workflow is that I keep a spreadsheet of my publications and talks, then run the code in these notebooks to generate the markdown files, then commit and push them to the GitHub repository.
 
-How to edit your site's GitHub repository
-------
-Many people use a git client to create files on their local computer and then push them to GitHub's servers. If you are not familiar with git, you can directly edit these configuration and markdown files directly in the github.com interface. Navigate to a file (like [this one](https://github.com/academicpages/academicpages.github.io/blob/master/_talks/2012-03-01-talk-1.md) and click the pencil icon in the top right of the content preview (to the right of the "Raw | Blame | History" buttons). You can delete a file by clicking the trashcan icon to the right of the pencil icon. You can also create new files or upload files by navigating to a directory and clicking the "Create new file" or "Upload files" buttons. 
 
-Example: editing a markdown file for a talk
-![Editing a markdown file for a talk](/images/editing-talk.png)
+<div id="news" class="news-content">
+    <!-- Your news content goes here -->
+    <li>Jul 2024, paper accepted by the 2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2024), Abu Dabi.</li>
+    <!-- <ul> -->
+    <li>Received best M.S. Thesis Award at the NYU 2024 Commencement Awards Ceremony</li>
+    <li>Apr 2024, our work <a href="https://arxiv.org/abs/2211.16988">QuadFormer</a> was accepted by the 21st International Conference on Ubiquitous Robots (UR), New York.</li>
+    <li>Jan 2024, our work <a href="https://arxiv.org/pdf/2310.04781">Unifying Foundation Models with Quadrotor Control for Visual Tracking Beyond Object Categories</a> was accepted by the  IEEE International Conference on
+Robotics and Automation (ICRA), Yokohama.</li>
+    <!-- </ul> -->
+</div>
 
-For more info
-------
-More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+<script>
+    function toggleNews() {
+        var newsDiv = document.getElementById("news");
+        var triangle = document.getElementById("triangle");
+        if (newsDiv.classList.contains("open")) {
+            newsDiv.classList.remove("open");
+            triangle.classList.remove("open");
+        } else {
+            newsDiv.classList.add("open");
+            triangle.classList.add("open");
+        }
+    }
+</script>
+
+## Research & Publications
+<table frame=hsides style="border-left-style: none;border-right-style: none;">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead>
+</thead>
+<tbody>
+
+<tr>
+<td markdown="span" style="text-align: center;vertical-align: middle;border-left-style: none;border-right-style: none;"><img src="{{ site.baseurl }}/images/TO-DO.png"></td>
+<td markdown="span" style="vertical-align: middle;border-left-style: none;border-right-style: none;">
+    **Learning Long-Horizon Predictions for Quadrotor Dynamics**<br>
+    **Pratyaksh Prabhav Rao**, Alessandro Saviolo, Tommaso Castiglione Ferrari, and Giuseppe Loianno.<br>
+    <!-- European Conference on Computer Vision (ECCV), 2024 in submission<br> -->
+    <!-- [[paper](https://arxiv.org/abs/2310.08820v2)]<br> -->
+    <details>
+    <span style="font-size: 14px">Accurate modeling of system dynamics is crucial for achieving high-performance planning and control of robotic systems. Although existing data-driven approaches represent a promising approach for modeling dynamics, their accuracy is limited to a short prediction horizon, overlooking the impact of compounding prediction errors over longer prediction horizons. Strategies to mitigate these cumulative errors remain underexplored. To bridge this gap, in this paper, we study the key design choices for efficiently learning long-horizon prediction dynamics for quadrotors. Specifically, we analyze the impact of multiple architectures, historical  data, and multi-step loss formulation. We show that sequential modeling techniques showcase their advantage in minimizing compounding errors compared to other types of solutions. Furthermore, we propose a novel decoupled dynamics learning approach, which further simplifies the learning process while also enhancing the approach modularity.Extensive experiments and ablation studies on real-world quadrotor data demonstrate the versatility and precision of the proposed approach. Our outcomes offer several insights and methodologies for enhancing long-term predictive accuracy of learned quadrotor dynamics for planning and control.</span>
+    </details>
+    </td>
+</tr>
+
+
+</tbody>
+</table>
+
+
+## Honors and Awards
+
+<div class="honors-awards">
+    <ul>
+        <li>Received best M.S. Thesis Award at the NYU 2024 Commencement Awards Ceremony.</li>
+        <li>Presented a Technical Research Paper at the 21st International Conference on Ubiquitous Robots (UR), New York, USA.</li>
+        <li>Presented a Technical Research Paper at the 2022 IEEE International Conference on Robotics and Automation (ICRA), 2022, Philadelphia, USA.</li>
+        <li>Presented a Technical Research Poster at the 2021 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) (IROS 2021),Prague, Czech Republic</li>
+        <li> Best project award at the Experts Hub Innovation Challenge 2019, Chennai, India.</li>
+    </ul>
+</div>
+<!-- 
+## Activities
+
+<div class="activities">
+    <ul>
+        <li>Presented a Technical Research Paper at the 21st International Conference on Ubiquitous Robots (UR), New York, USA.</li>
+        <li>Presented a Technical Research Paper at the 2022 IEEE International Conference on Robotics and Automation (ICRA), 2022, Philadelphia, USA.</li>
+        <li>Presented a Technical Research Poster at the 2021 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) (IROS 2021),Prague, Czech Republic</li>
+        <li> Best project award at the Experts Hub Innovation Challenge 2019, Chennai, India.
+    </ul>
+</div> -->
+
+<!-- <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=shW72uw30kk16-iNF-9p2HCZ7qJI1k9hYDoMXjyKpHU&cl=ffffff&w=a"></script> -->
